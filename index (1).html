@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anviksika — Startup Clarity & Growth Systems</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0D1B2A;--navy-mid:#162236;--gold:#C9922A;--gold-light:#E8B84B;--white:#FFFFFF;--off-white:#F8F7F4;--grey-light:#F0EEE9;--grey-mid:#D9D6CF;--grey-text:#6B6760;--dark-text:#1A1A1A;--font-body:'Plus Jakarta Sans',sans-serif;--font-serif:'Cormorant Garamond',Georgia,serif;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-body);background:var(--white);color:var(--dark-text);line-height:1.7;overflow-x:hidden;}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,0.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--grey-mid);padding:0 5%;height:68px;display:flex;align-items:center;justify-content:space-between;transition:box-shadow 0.3s;}
+nav.scrolled{box-shadow:0 2px 24px rgba(0,0,0,0.07);}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-logo-text{font-size:20px;font-weight:800;color:var(--navy);letter-spacing:-0.3px;}
+.nav-logo-dot{width:5px;height:5px;background:var(--gold);border-radius:50%;display:inline-block;margin-left:1px;position:relative;top:-7px;}
+.nav-links{display:flex;gap:2.5rem;list-style:none;}
+.nav-links a{font-size:13.5px;font-weight:500;color:var(--grey-text);text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover{color:var(--navy);}
+.nav-cta{background:var(--navy)!important;color:var(--white)!important;padding:9px 22px;border-radius:4px;font-weight:600!important;transition:background 0.2s!important;}
+.nav-cta:hover{background:var(--gold)!important;}
+.nav-mobile-btn{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px;}
+.nav-mobile-btn span{display:block;width:24px;height:2px;background:var(--navy);transition:all 0.3s;}
+.hero{background:var(--navy);min-height:100vh;display:flex;align-items:center;padding:120px 5% 80px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-200px;right:-150px;width:600px;height:600px;background:radial-gradient(circle,rgba(201,146,42,.1) 0%,transparent 70%);pointer-events:none;}
+.hero-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(201,146,42,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(201,146,42,.05) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse at 70% 30%,black 20%,transparent 70%);pointer-events:none;}
+.hero-inner{max-width:1160px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 420px;gap:80px;align-items:center;position:relative;z-index:1;}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:28px;opacity:0;animation:fadeUp 0.7s 0.1s forwards;}
+.hero-eyebrow::before{content:'';width:28px;height:1px;background:var(--gold);}
+.hero h1{font-family:var(--font-serif);font-size:clamp(44px,5.2vw,72px);font-weight:600;line-height:1.08;color:var(--white);margin-bottom:28px;letter-spacing:-0.5px;opacity:0;animation:fadeUp 0.8s 0.25s forwards;}
+.hero h1 em{font-style:italic;color:var(--gold);}
+.hero-sub{font-size:16px;color:rgba(255,255,255,.65);max-width:520px;line-height:1.85;margin-bottom:48px;font-weight:400;opacity:0;animation:fadeUp 0.8s 0.4s forwards;}
+.hero-actions{display:flex;gap:16px;flex-wrap:wrap;opacity:0;animation:fadeUp 0.8s 0.55s forwards;}
+.btn-primary{background:var(--gold);color:var(--white);padding:14px 32px;border-radius:4px;font-size:14px;font-weight:700;letter-spacing:.3px;text-decoration:none;border:none;cursor:pointer;transition:all .25s;display:inline-block;}
+.btn-primary:hover{background:var(--gold-light);transform:translateY(-1px);box-shadow:0 8px 24px rgba(201,146,42,.35);}
+.btn-outline{background:transparent;color:rgba(255,255,255,.8);padding:14px 28px;border-radius:4px;font-size:14px;font-weight:500;text-decoration:none;border:1px solid rgba(255,255,255,.25);cursor:pointer;transition:all .25s;display:inline-block;}
+.btn-outline:hover{border-color:rgba(255,255,255,.6);color:var(--white);}
+.hero-stats{display:flex;gap:0;margin-top:56px;padding-top:40px;border-top:1px solid rgba(255,255,255,.1);opacity:0;animation:fadeUp 0.8s 0.7s forwards;}
+.hero-stat{flex:1;padding-right:40px;}
+.hero-stat:not(:first-child){padding-left:40px;border-left:1px solid rgba(255,255,255,.1);}
+.hero-stat-num{font-family:var(--font-serif);font-size:40px;font-weight:700;color:var(--white);line-height:1;margin-bottom:8px;}
+.hero-stat-num sup{font-size:20px;color:var(--gold);}
+.hero-stat-label{font-size:12px;color:rgba(255,255,255,.45);line-height:1.5;}
+.hero-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.13);border-radius:10px;padding:40px 36px;position:relative;overflow:hidden;opacity:0;animation:fadeUp 0.9s 0.5s forwards;}
+.hero-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+.hero-card-tag{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:block;}
+.hero-card h3{font-family:var(--font-serif);font-size:26px;font-weight:600;color:var(--white);line-height:1.3;margin-bottom:14px;}
+.hero-card p{font-size:14px;color:rgba(255,255,255,.55);line-height:1.75;margin-bottom:28px;}
+.hero-card-steps{list-style:none;margin-bottom:32px;}
+.hero-card-steps li{display:flex;align-items:flex-start;gap:12px;font-size:13.5px;color:rgba(255,255,255,.7);padding:10px 0;border-bottom:1px solid rgba(255,255,255,.07);}
+.hero-card-steps li:last-child{border-bottom:none;}
+.step-num{width:22px;height:22px;border-radius:50%;background:rgba(201,146,42,.15);border:1px solid rgba(201,146,42,.3);color:var(--gold);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+.hero-card .btn-primary{width:100%;text-align:center;margin-bottom:12px;}
+.hero-card-note{text-align:center;font-size:11.5px;color:rgba(255,255,255,.28);}
+.marquee-wrap{overflow:hidden;padding:18px 0;background:var(--off-white);border-bottom:1px solid var(--grey-mid);border-top:1px solid var(--grey-mid);}
+.marquee-track{display:flex;animation:marquee 28s linear infinite;width:max-content;}
+.marquee-item{display:flex;align-items:center;gap:20px;padding:0 36px;white-space:nowrap;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--grey-text);}
+.marquee-item .dot{color:var(--gold);font-size:8px;}
+@keyframes marquee{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+@keyframes fadeUp{to{opacity:1;transform:translateY(0);}}
+.section{padding:100px 5%;}
+.section-inner{max-width:1160px;margin:0 auto;}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+.eyebrow::before{content:'';width:24px;height:1px;background:var(--gold);}
+.section-h{font-family:var(--font-serif);font-size:clamp(32px,3.5vw,50px);font-weight:600;color:var(--navy);line-height:1.13;margin-bottom:20px;letter-spacing:-.3px;}
+.section-h em{font-style:italic;}
+.problem-section{background:var(--off-white);}
+.problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;margin-top:60px;}
+.problem-left p{font-size:15.5px;color:var(--grey-text);line-height:1.9;margin-bottom:20px;}
+.problem-left p strong{color:var(--dark-text);font-weight:700;}
+.stat-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:40px;}
+.stat-box{background:var(--white);border:1px solid var(--grey-mid);border-radius:8px;padding:24px 20px;border-bottom:3px solid var(--gold);transition:transform .2s,box-shadow .2s;}
+.stat-box:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.07);}
+.stat-box-num{font-family:var(--font-serif);font-size:38px;font-weight:700;color:var(--navy);line-height:1;margin-bottom:8px;}
+.stat-box-num .gold{color:var(--gold);}
+.stat-box-label{font-size:12.5px;color:var(--grey-text);line-height:1.5;}
+.stat-box-source{font-size:10px;color:var(--grey-mid);margin-top:8px;font-style:italic;}
+.problem-blockers{display:grid;gap:12px;}
+.blocker-card{background:var(--white);border:1px solid var(--grey-mid);border-left:3px solid var(--navy);border-radius:8px;padding:20px 24px;opacity:0;transform:translateX(20px);transition:opacity .5s,transform .5s,border-left-color .2s;}
+.blocker-card.visible{opacity:1;transform:translateX(0);}
+.blocker-card:hover{border-left-color:var(--gold);box-shadow:0 4px 16px rgba(0,0,0,.06);}
+.blocker-card h4{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:5px;}
+.blocker-card p{font-size:13.5px;color:var(--grey-text);line-height:1.65;}
+.what-section{background:var(--white);}
+.what-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:60px;}
+.what-card{border:1px solid var(--grey-mid);border-radius:10px;padding:36px 28px;opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s,box-shadow .25s,border-color .25s;}
+.what-card.visible{opacity:1;transform:translateY(0);}
+.what-card:hover{border-color:var(--gold);box-shadow:0 6px 28px rgba(0,0,0,.07);}
+.what-num{font-size:10px;font-weight:700;letter-spacing:2px;color:var(--gold);margin-bottom:18px;display:block;}
+.what-icon-wrap{width:46px;height:46px;background:var(--off-white);border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;transition:background .2s;}
+.what-card:hover .what-icon-wrap{background:rgba(201,146,42,.1);}
+.what-icon-wrap svg{width:22px;height:22px;stroke:var(--navy);fill:none;stroke-width:1.5;}
+.what-card h3{font-family:var(--font-serif);font-size:21px;font-weight:600;color:var(--navy);margin-bottom:12px;line-height:1.25;}
+.what-card p{font-size:14px;color:var(--grey-text);line-height:1.75;}
+.about-section{background:var(--grey-light);}
+.about-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.about-left p{font-size:15px;color:var(--grey-text);line-height:1.9;margin-bottom:18px;}
+.about-left p strong{color:var(--dark-text);font-weight:700;}
+.team-pillars{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:36px;}
+.pillar{background:var(--white);border:1px solid var(--grey-mid);border-radius:8px;padding:20px;}
+.pillar-title{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:4px;}
+.pillar-desc{font-size:12.5px;color:var(--grey-text);line-height:1.5;}
+.about-right-card{background:var(--navy);border-radius:12px;padding:44px 36px;}
+.about-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:28px;display:block;}
+.differentiator{padding:18px 0;border-bottom:1px solid rgba(255,255,255,.08);display:grid;grid-template-columns:16px 1fr;gap:14px;align-items:start;}
+.differentiator:last-child{border-bottom:none;}
+.diff-check{color:var(--gold);font-size:14px;margin-top:2px;}
+.diff-text strong{display:block;font-size:13.5px;font-weight:700;color:var(--white);margin-bottom:3px;}
+.diff-text span{font-size:13px;color:rgba(255,255,255,.5);line-height:1.55;}
+.packages-section{background:var(--white);}
+.packages-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:60px;}
+.pkg-card{border:1px solid var(--grey-mid);border-radius:10px;padding:32px 24px;position:relative;transition:all .25s;display:flex;flex-direction:column;background:var(--white);opacity:0;transform:translateY(24px);}
+.pkg-card.visible{opacity:1;transform:translateY(0);}
+.pkg-card:hover{border-color:var(--navy);box-shadow:0 10px 36px rgba(0,0,0,.09);transform:translateY(-3px);}
+.pkg-card.popular{border:2px solid var(--navy);background:var(--navy);}
+.pkg-popular-tag{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--white);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 16px;border-radius:20px;white-space:nowrap;}
+.pkg-num{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;}
+.pkg-name{font-family:var(--font-serif);font-size:22px;font-weight:600;color:var(--navy);margin-bottom:8px;line-height:1.2;}
+.pkg-card.popular .pkg-name{color:var(--white);}
+.pkg-price{font-family:var(--font-serif);font-size:30px;font-weight:700;color:var(--navy);margin-bottom:4px;}
+.pkg-card.popular .pkg-price{color:var(--white);}
+.pkg-timeline{font-size:12px;color:var(--gold);font-weight:600;letter-spacing:.5px;margin-bottom:22px;}
+.pkg-divider{height:1px;background:var(--grey-mid);margin-bottom:22px;}
+.pkg-card.popular .pkg-divider{background:rgba(255,255,255,.12);}
+.pkg-features{list-style:none;flex:1;margin-bottom:28px;}
+.pkg-features li{display:flex;gap:10px;font-size:13px;color:var(--grey-text);padding:7px 0;border-bottom:1px solid var(--grey-light);line-height:1.45;}
+.pkg-features li:last-child{border-bottom:none;}
+.pkg-card.popular .pkg-features li{color:rgba(255,255,255,.65);border-bottom-color:rgba(255,255,255,.07);}
+.pkg-features li::before{content:'→';color:var(--gold);font-size:12px;flex-shrink:0;margin-top:1px;}
+.pkg-outcome{font-family:var(--font-serif);font-style:italic;font-size:14px;color:var(--grey-text);padding:14px 16px;background:var(--off-white);border-radius:6px;margin-bottom:20px;line-height:1.5;}
+.pkg-card.popular .pkg-outcome{background:rgba(255,255,255,.07);color:rgba(255,255,255,.55);}
+.pkg-btn{display:block;text-align:center;padding:12px;border-radius:4px;font-size:13px;font-weight:700;text-decoration:none;cursor:pointer;border:none;transition:all .2s;letter-spacing:.3px;}
+.pkg-btn-outline{border:1px solid var(--navy);background:transparent;color:var(--navy);}
+.pkg-btn-outline:hover{background:var(--navy);color:var(--white);}
+.pkg-btn-solid{background:var(--gold);color:var(--white);}
+.pkg-btn-solid:hover{background:var(--gold-light);}
+.payment-note{margin-top:40px;background:var(--off-white);border:1px solid var(--grey-mid);border-radius:8px;padding:18px 24px;}
+.payment-note p{font-size:13.5px;color:var(--grey-text);}
+.payment-note strong{color:var(--dark-text);font-weight:700;}
+.process-section{background:var(--off-white);}
+.process-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-top:60px;position:relative;}
+.process-steps::before{content:'';position:absolute;top:27px;left:calc(10% + 14px);right:calc(10% + 14px);height:1px;background:var(--grey-mid);z-index:0;}
+.process-step{display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 12px;position:relative;z-index:1;}
+.step-circle{width:54px;height:54px;border-radius:50%;background:var(--white);border:2px solid var(--grey-mid);display:flex;align-items:center;justify-content:center;font-family:var(--font-serif);font-size:20px;font-weight:700;color:var(--navy);margin-bottom:20px;transition:all .25s;}
+.process-step:hover .step-circle{background:var(--navy);color:var(--white);border-color:var(--navy);}
+.step-title{font-size:13.5px;font-weight:700;color:var(--navy);margin-bottom:8px;}
+.step-desc{font-size:12.5px;color:var(--grey-text);line-height:1.6;}
+.results-section{background:var(--white);}
+.results-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:60px;}
+.result-card{border:1px solid var(--grey-mid);border-radius:10px;overflow:hidden;opacity:0;transform:translateY(28px);transition:opacity .6s,transform .6s;}
+.result-card.visible{opacity:1;transform:translateY(0);}
+.result-card:hover{box-shadow:0 8px 32px rgba(0,0,0,.08);}
+.result-card-top{background:var(--navy);padding:28px 28px 24px;}
+.result-founder{font-size:13px;font-weight:700;color:var(--white);letter-spacing:.3px;}
+.result-package{font-size:11.5px;color:rgba(255,255,255,.45);margin-top:4px;}
+.result-card-body{padding:24px 28px;}
+.result-quote{font-family:var(--font-serif);font-size:17px;font-style:italic;color:var(--dark-text);line-height:1.65;margin-bottom:20px;}
+.result-metric-row{display:flex;justify-content:space-between;padding:10px 0;border-top:1px solid var(--grey-light);}
+.result-metric-label{font-size:12px;color:var(--grey-text);}
+.result-metric-val{font-size:13px;font-weight:700;color:var(--navy);}
+.result-metric-val.up{color:#1a8a40;}
+.results-footer{margin-top:56px;padding-top:48px;border-top:1px solid var(--grey-mid);display:flex;justify-content:center;gap:0;}
+.results-stat{flex:1;text-align:center;padding:0 40px;border-right:1px solid var(--grey-mid);max-width:220px;}
+.results-stat:last-child{border-right:none;}
+.results-stat-num{font-family:var(--font-serif);font-size:52px;font-weight:700;color:var(--navy);line-height:1;letter-spacing:-1px;}
+.results-stat-num .suf{color:var(--gold);}
+.results-stat-label{font-size:12px;color:var(--grey-text);margin-top:8px;}
+.faq-section{background:var(--grey-light);}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 60px;margin-top:56px;}
+.faq-item{border-bottom:1px solid var(--grey-mid);}
+.faq-question{width:100%;background:none;border:none;text-align:left;padding:22px 0;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;}
+.faq-question span:first-child{font-size:14.5px;font-weight:600;color:var(--navy);line-height:1.4;font-family:var(--font-body);}
+.faq-arrow{width:22px;height:22px;border-radius:50%;border:1px solid var(--grey-mid);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;font-size:12px;color:var(--grey-text);}
+.faq-item.open .faq-arrow{background:var(--navy);border-color:var(--navy);color:var(--white);transform:rotate(45deg);}
+.faq-answer{font-size:14.5px;color:var(--grey-text);line-height:1.8;max-height:0;overflow:hidden;transition:max-height .35s ease,padding .25s;padding-bottom:0;}
+.faq-item.open .faq-answer{max-height:300px;padding-bottom:20px;}
+.contact-strip{background:var(--navy);padding:80px 5%;text-align:center;}
+.contact-strip-inner{max-width:680px;margin:0 auto;}
+.contact-strip .eyebrow{justify-content:center;margin-bottom:16px;}
+.contact-strip .eyebrow::before{display:none;}
+.contact-strip h3{font-family:var(--font-serif);font-size:36px;font-weight:600;color:var(--white);margin-bottom:16px;}
+.contact-strip p{font-size:15px;color:rgba(255,255,255,.55);margin-bottom:36px;line-height:1.8;}
+.contact-links{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+.contact-link-btn{display:inline-flex;align-items:center;gap:10px;padding:15px 30px;border-radius:4px;font-size:14px;font-weight:700;text-decoration:none;transition:all .25s;letter-spacing:.3px;}
+.contact-link-btn.cal{background:var(--gold);color:var(--white);}
+.contact-link-btn.cal:hover{background:var(--gold-light);transform:translateY(-1px);box-shadow:0 8px 24px rgba(201,146,42,.35);}
+.contact-link-btn.mail{background:transparent;color:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.25);}
+.contact-link-btn.mail:hover{border-color:rgba(255,255,255,.6);color:var(--white);}
+.contact-link-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;}
+.cta-section{background:var(--off-white);padding:100px 5%;text-align:center;border-top:1px solid var(--grey-mid);}
+.cta-section .eyebrow{justify-content:center;}
+.cta-section .eyebrow::before{display:none;}
+.cta-title{font-family:var(--font-serif);font-size:clamp(36px,4vw,58px);font-weight:600;color:var(--navy);line-height:1.15;margin-bottom:20px;}
+.cta-title em{font-style:italic;color:var(--gold);}
+.cta-sub{font-size:16px;color:var(--grey-text);max-width:500px;margin:0 auto 44px;line-height:1.85;}
+.cta-buttons{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+.cta-email-btn{background:var(--navy);color:var(--white);padding:16px 40px;border-radius:4px;font-size:14.5px;font-weight:700;text-decoration:none;transition:all .25s;display:inline-block;}
+.cta-email-btn:hover{background:var(--gold);transform:translateY(-1px);}
+.cta-ghost{background:transparent;color:var(--navy);padding:16px 32px;border-radius:4px;font-size:14.5px;font-weight:600;text-decoration:none;border:1px solid var(--grey-mid);transition:all .25s;display:inline-block;}
+.cta-ghost:hover{border-color:var(--navy);}
+.cta-note{margin-top:28px;font-size:12.5px;color:var(--grey-text);}
+footer{background:#06101C;padding:48px 5%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;}
+.footer-logo{font-size:20px;font-weight:800;color:var(--white);text-decoration:none;display:flex;align-items:center;gap:10px;letter-spacing:-.3px;}
+.footer-tagline{font-size:12px;color:rgba(255,255,255,.25);margin-top:4px;}
+.footer-links{display:flex;gap:2rem;list-style:none;}
+.footer-links a{font-size:13px;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s;}
+.footer-links a:hover{color:var(--white);}
+.footer-copy{font-size:12px;color:rgba(255,255,255,.2);}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-d1{transition-delay:.1s;}
+.reveal-d2{transition-delay:.2s;}
+.reveal-d3{transition-delay:.3s;}
+
+/* Free AI Diagnosis section */
+.diagnosis-section{background:var(--navy);position:relative;overflow:hidden;}
+.diagnosis-section::before{content:'';position:absolute;top:-220px;left:-150px;width:600px;height:600px;background:radial-gradient(circle,rgba(201,146,42,.08) 0%,transparent 70%);pointer-events:none;}
+.diagnosis-section .eyebrow{color:var(--gold);}
+.diagnosis-section .eyebrow::before{background:var(--gold);}
+.diagnosis-section .section-h{color:var(--white);}
+.diagnosis-section .section-h em{color:var(--gold);}
+.diagnosis-intro{font-size:15.5px;color:rgba(255,255,255,.6);max-width:560px;line-height:1.9;margin-bottom:0;}
+.diagnosis-wrap{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;margin-top:56px;position:relative;z-index:1;}
+.diagnosis-form-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:36px;}
+.diag-field{margin-bottom:20px;}
+.diag-field label{display:block;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
+.diag-field input,.diag-field textarea{width:100%;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.18);border-radius:6px;padding:13px 16px;font-family:var(--font-body);font-size:14px;color:var(--white);transition:border-color .2s,background .2s;}
+.diag-field input::placeholder,.diag-field textarea::placeholder{color:rgba(255,255,255,.32);}
+.diag-field input:focus,.diag-field textarea:focus{outline:none;border-color:var(--gold);background:rgba(255,255,255,.06);}
+.diag-field textarea{resize:vertical;min-height:88px;font-family:var(--font-body);}
+.diag-hp{position:absolute;left:-9999px;top:-9999px;opacity:0;height:0;width:0;}
+.diag-submit{width:100%;background:var(--gold);color:var(--white);padding:15px 32px;border-radius:4px;font-size:14px;font-weight:700;letter-spacing:.3px;border:none;cursor:pointer;transition:all .25s;margin-top:4px;}
+.diag-submit:hover{background:var(--gold-light);transform:translateY(-1px);box-shadow:0 8px 24px rgba(201,146,42,.35);}
+.diag-submit:disabled{opacity:.55;cursor:not-allowed;transform:none;box-shadow:none;}
+.diag-fineprint{font-size:11.5px;color:rgba(255,255,255,.3);margin-top:14px;text-align:center;}
+.diagnosis-side h3{font-family:var(--font-serif);font-size:24px;font-weight:600;color:var(--white);margin-bottom:18px;line-height:1.3;}
+.diag-steps{list-style:none;}
+.diag-steps li{display:flex;align-items:flex-start;gap:14px;font-size:14px;color:rgba(255,255,255,.65);padding:14px 0;border-bottom:1px solid rgba(255,255,255,.08);line-height:1.6;}
+.diag-steps li:last-child{border-bottom:none;}
+.diag-steps .step-num{margin-top:1px;}
+/* Result panel */
+.diag-result{display:none;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:36px;margin-top:32px;}
+.diag-result.visible{display:block;animation:fadeUp .6s forwards;}
+.diag-result h4{font-family:var(--font-serif);font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin:22px 0 12px;}
+.diag-result h4:first-child{margin-top:0;}
+.diag-result ul{list-style:none;margin-bottom:6px;}
+.diag-result ul li{font-size:14px;color:rgba(255,255,255,.75);line-height:1.7;padding:6px 0 6px 22px;position:relative;}
+.diag-result ul li::before{content:'—';position:absolute;left:0;color:var(--gold);}
+.diag-fix{padding:14px 0;border-top:1px solid rgba(255,255,255,.08);}
+.diag-fix:first-of-type{border-top:none;}
+.diag-fix-title{font-size:14.5px;font-weight:700;color:var(--white);margin-bottom:4px;}
+.diag-fix-rationale{font-size:13.5px;color:rgba(255,255,255,.55);line-height:1.7;}
+.diag-result-cta{margin-top:24px;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);text-align:center;}
+.diag-result-cta p{font-size:14px;color:rgba(255,255,255,.6);margin-bottom:14px;}
+/* Loading state */
+.diag-loading{display:none;text-align:center;padding:48px 0;}
+.diag-loading.visible{display:block;}
+.diag-spinner{width:36px;height:36px;border:3px solid rgba(255,255,255,.12);border-top-color:var(--gold);border-radius:50%;margin:0 auto 18px;animation:spin .9s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.diag-loading p{font-size:13.5px;color:rgba(255,255,255,.5);}
+/* Error / status message */
+.diag-msg{display:none;border-radius:6px;padding:14px 18px;font-size:13.5px;line-height:1.6;margin-top:18px;}
+.diag-msg.visible{display:block;}
+.diag-msg.error{background:rgba(220,80,80,.1);border:1px solid rgba(220,80,80,.3);color:#f0a8a8;}
+.diag-msg.info{background:rgba(201,146,42,.1);border:1px solid rgba(201,146,42,.3);color:var(--gold-light);}
+@media(max-width:900px){
+.diagnosis-wrap{grid-template-columns:1fr;gap:40px;}
+}
+@media(max-width:900px){
+.nav-links{display:none;}
+.nav-mobile-btn{display:flex;}
+.nav-links.open{display:flex;flex-direction:column;position:absolute;top:68px;left:0;right:0;background:rgba(255,255,255,.98);backdrop-filter:blur(16px);padding:20px 5% 28px;border-bottom:1px solid var(--grey-mid);gap:1rem;}
+.hero-inner{grid-template-columns:1fr;}
+.hero-card{display:none;}
+.hero-stats{flex-direction:column;gap:20px;}
+.hero-stat{border-left:none!important;padding:0!important;border-bottom:1px solid rgba(255,255,255,.1);padding-bottom:16px!important;}
+.hero-stat:last-child{border-bottom:none;}
+.problem-grid,.about-inner{grid-template-columns:1fr;gap:40px;}
+.what-grid{grid-template-columns:1fr 1fr;}
+.packages-grid{grid-template-columns:1fr 1fr;}
+.process-steps{grid-template-columns:1fr 1fr;gap:32px;}
+.process-steps::before{display:none;}
+.results-grid{grid-template-columns:1fr;}
+.faq-grid{grid-template-columns:1fr;}
+.results-footer{flex-wrap:wrap;gap:24px;}
+.results-stat{border-right:none;padding:0;}
+}
+@media(max-width:600px){
+.what-grid,.packages-grid,.team-pillars,.stat-row{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+<nav id="topnav">
+  <a href="#home" class="nav-logo">
+    <svg width="32" height="32" viewBox="0 0 36 36" fill="none"><polygon points="18,4 32,30 4,30" fill="none" stroke="#C9922A" stroke-width="2.5" stroke-linejoin="round"/><line x1="10" y1="23" x2="26" y2="23" stroke="#C9922A" stroke-width="2.5" stroke-linecap="round"/><line x1="22" y1="16" x2="32" y2="8" stroke="#C9922A" stroke-width="2.2" stroke-linecap="round"/><polyline points="27,8 32,8 32,13" fill="none" stroke="#C9922A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span class="nav-logo-text">Anviksika<span class="nav-logo-dot"></span></span>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#problem">The Problem</a></li>
+    <li><a href="#what">What We Do</a></li>
+    <li><a href="#packages">Packages</a></li>
+    <li><a href="#results">Results</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="https://calendly.com/anviksika/30min" target="_blank" class="nav-cta">Book a Call</a></li>
+  </ul>
+  <button class="nav-mobile-btn" id="mobileMenuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<section class="hero" id="home">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow">Early-Stage Growth Strategy</div>
+      <h1>Your startup isn't broken.<br><em>Your strategy is.</em></h1>
+      <p class="hero-sub">We work with 0–2 year founders stuck between hustle and scale. Not with vague decks — with a diagnosis, a documented system, and a roadmap you can actually follow.</p>
+      <div class="hero-actions">
+        <a href="https://calendly.com/anviksika/30min" target="_blank" class="btn-primary">Book Discovery Call</a>
+        <a href="#what" class="btn-outline">How it works</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="hero-stat-num">42<sup>%</sup></div><div class="hero-stat-label">of startups fail from<br>unclear positioning</div></div>
+        <div class="hero-stat"><div class="hero-stat-num">6<sup>×</sup></div><div class="hero-stat-label">avg client ROI<br>within 60 days</div></div>
+        <div class="hero-stat"><div class="hero-stat-num">1–4</div><div class="hero-stat-label">weeks to a<br>complete system</div></div>
+      </div>
+    </div>
+    <div class="hero-card">
+      <span class="hero-card-tag">Free Offer — No Strings</span>
+      <h3>Get an instant AI growth diagnosis of your business</h3>
+      <p>Drop in your website and what you're struggling with. Our AI analyst gives you a written diagnosis in seconds — what's working, what's unclear, and your top 3 fixes. No email wait, no sales call.</p>
+      <ul class="hero-card-steps">
+        <li><span class="step-num">1</span> Paste your website URL</li>
+        <li><span class="step-num">2</span> Describe what isn't working</li>
+        <li><span class="step-num">3</span> Get your diagnosis instantly</li>
+      </ul>
+      <a href="#diagnosis" class="btn-primary">Get My Free Diagnosis ↓</a>
+      <p class="hero-card-note">anviksika@zohomail.in &nbsp;·&nbsp; US · UK · India · Global</p>
+    </div>
+  </div>
+</section>
+
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">Growth Diagnosis <span class="dot">◆</span></span>
+    <span class="marquee-item">Competitive Intelligence <span class="dot">◆</span></span>
+    <span class="marquee-item">Go-to-Market Strategy <span class="dot">◆</span></span>
+    <span class="marquee-item">90-Day Roadmaps <span class="dot">◆</span></span>
+    <span class="marquee-item">Founder Advisory <span class="dot">◆</span></span>
+    <span class="marquee-item">Positioning Systems <span class="dot">◆</span></span>
+    <span class="marquee-item">KPI Frameworks <span class="dot">◆</span></span>
+    <span class="marquee-item">Scale Blueprints <span class="dot">◆</span></span>
+    <span class="marquee-item">Growth Diagnosis <span class="dot">◆</span></span>
+    <span class="marquee-item">Competitive Intelligence <span class="dot">◆</span></span>
+    <span class="marquee-item">Go-to-Market Strategy <span class="dot">◆</span></span>
+    <span class="marquee-item">90-Day Roadmaps <span class="dot">◆</span></span>
+    <span class="marquee-item">Founder Advisory <span class="dot">◆</span></span>
+    <span class="marquee-item">Positioning Systems <span class="dot">◆</span></span>
+    <span class="marquee-item">KPI Frameworks <span class="dot">◆</span></span>
+    <span class="marquee-item">Scale Blueprints <span class="dot">◆</span></span>
+  </div>
+</div>
+
+<section class="section diagnosis-section" id="diagnosis">
+  <div class="section-inner">
+    <div class="eyebrow reveal">Free AI Growth Diagnosis</div>
+    <h2 class="section-h reveal reveal-d1">Get a real diagnosis.<br><em>Instantly. For free.</em></h2>
+    <p class="diagnosis-intro reveal reveal-d2">Drop in your website and tell us what's not working. Our AI growth analyst — trained on Anviksika's diagnostic framework — reads your homepage and gives you a written breakdown: what's working, what's unclear, and the top 3 fixes to prioritize. No payment, no signup, no waiting.</p>
+
+    <div class="diagnosis-wrap">
+      <div class="reveal reveal-d3">
+        <div class="diagnosis-form-card">
+          <form id="diagForm" autocomplete="off">
+            <div class="diag-field">
+              <label for="diagUrl">Your website URL</label>
+              <input type="text" id="diagUrl" name="url" placeholder="yourcompany.com" required>
+            </div>
+            <div class="diag-field">
+              <label for="diagStruggle">What are you struggling with? <span style="color:rgba(255,255,255,.3);font-weight:500;text-transform:none;letter-spacing:0;">(optional)</span></label>
+              <textarea id="diagStruggle" name="struggling" placeholder="e.g. lots of traffic but nobody signs up, or I can't tell if my messaging is even clear..."></textarea>
+            </div>
+            <div class="diag-field">
+              <label for="diagEmail">Email (we'll send a copy here too)</label>
+              <input type="email" id="diagEmail" name="email" placeholder="you@company.com" required>
+            </div>
+            <!-- honeypot -->
+            <div class="diag-hp" aria-hidden="true">
+              <label for="company_website">Company Website</label>
+              <input type="text" id="company_website" name="company_website" tabindex="-1" autocomplete="off">
+            </div>
+            <button type="submit" class="diag-submit" id="diagSubmitBtn">Get My Free Diagnosis</button>
+            <p class="diag-fineprint">Takes about 15–20 seconds · 3 free diagnoses per day</p>
+          </form>
+
+          <div class="diag-loading" id="diagLoading">
+            <div class="diag-spinner"></div>
+            <p>Reading your site and running the diagnosis…</p>
+          </div>
+
+          <div class="diag-msg" id="diagMsg"></div>
+        </div>
+
+        <div class="diag-result" id="diagResult">
+          <div id="diagResultContent"></div>
+          <div class="diag-result-cta">
+            <p>Want a full 18–22 page diagnostic with competitor analysis and a 90-day roadmap?</p>
+            <a href="https://calendly.com/anviksika/30min" target="_blank" class="btn-primary">Book a Call →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="diagnosis-side reveal reveal-d3">
+        <h3>How it works</h3>
+        <ul class="diag-steps">
+          <li><span class="step-num">1</span> We read your homepage — headings, copy, calls to action, the works.</li>
+          <li><span class="step-num">2</span> Our AI applies Anviksika's growth framework to spot positioning gaps and unclear messaging.</li>
+          <li><span class="step-num">3</span> You get a written breakdown: what's working, what's unclear, and your top 3 prioritized fixes — right here, plus a copy by email.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section problem-section" id="problem">
+  <div class="section-inner">
+    <div class="eyebrow reveal">The Problem</div>
+    <h2 class="section-h reveal reveal-d1">Most early-stage founders<br>are stuck in the <em>same cycle.</em></h2>
+    <div class="problem-grid">
+      <div class="problem-left reveal reveal-d2">
+        <p>You have a product. You're trying everything — Instagram, cold email, SEO, LinkedIn, paid ads. <strong>But nothing sticks.</strong> Revenue is inconsistent. Growth is random.</p>
+        <p>The problem isn't your tactics. The problem is your <strong>positioning isn't clear enough</strong> and you don't have a system. When prospects don't immediately understand what you do and who it's for, no amount of marketing fixes that.</p>
+        <p>And hiring an agency doesn't solve it either — they execute tactics without diagnosing strategy. You spend money before knowing if it works.</p>
+        <div class="stat-row">
+          <div class="stat-box"><div class="stat-box-num"><span class="gold">42</span>%</div><div class="stat-box-label">Fail from no real market need</div><div class="stat-box-source">CB Insights, 2023</div></div>
+          <div class="stat-box"><div class="stat-box-num"><span class="gold">29</span>%</div><div class="stat-box-label">Run out of cash — 74% had runway left</div><div class="stat-box-source">Failory Report, 2022</div></div>
+          <div class="stat-box"><div class="stat-box-num"><span class="gold">23</span>%</div><div class="stat-box-label">Wrong team focus — no prioritisation</div><div class="stat-box-source">Statista Global, 2023</div></div>
+          <div class="stat-box"><div class="stat-box-num"><span class="gold">19</span>%</div><div class="stat-box-label">Outcompeted — skipped competitive analysis</div><div class="stat-box-source">First Round Capital, 2022</div></div>
+        </div>
+      </div>
+      <div class="problem-blockers">
+        <div class="blocker-card"><h4>Weak Positioning</h4><p>Prospects can't tell what you do or who it's for. No amount of marketing fixes unclear messaging.</p></div>
+        <div class="blocker-card"><h4>No Customer Acquisition System</h4><p>Random tactics without a repeatable funnel. You can't scale what you can't measure or replicate.</p></div>
+        <div class="blocker-card"><h4>No Prioritisation Framework</h4><p>Everything feels equally urgent. Without a structured roadmap, effort gets scattered across the wrong problems.</p></div>
+        <div class="blocker-card"><h4>Skipped Competitive Analysis</h4><p>You're building without knowing where you can genuinely win. Rivals don't need to be better — just clearer.</p></div>
+        <div class="blocker-card"><h4>Operational Chaos</h4><p>Firefighting every day with no repeatable processes. Growth stalls because the system can't handle it.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section what-section" id="what">
+  <div class="section-inner">
+    <div class="eyebrow reveal">What We Do</div>
+    <h2 class="section-h reveal reveal-d1">Diagnosis first. <em>Systems second.</em><br>Always documented.</h2>
+    <div class="what-grid">
+      <div class="what-card"><span class="what-num">01</span><div class="what-icon-wrap"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div><h3>Growth Diagnosis</h3><p>We diagnose your positioning, messaging, and customer acquisition funnel. Identify the 5–10 specific blockers — ranked and specific, not vague recommendations.</p></div>
+      <div class="what-card"><span class="what-num">02</span><div class="what-icon-wrap"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><h3>Structured Roadmaps</h3><p>A 90-day prioritised plan with week-by-week actions. Not a vague strategy deck — an executable document your team can follow the day you receive it.</p></div>
+      <div class="what-card"><span class="what-num">03</span><div class="what-icon-wrap"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><h3>Systems & Playbooks</h3><p>Repeatable processes, KPI frameworks, and delegation systems so growth isn't dependent on you working 16-hour days. Built for your exact team size and stage.</p></div>
+      <div class="what-card"><span class="what-num">04</span><div class="what-icon-wrap"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><h3>Competitive Intelligence</h3><p>In-depth analysis of 5–10 direct competitors — what they're doing, where gaps exist, and exactly where you can win. Built for your specific market and geography.</p></div>
+      <div class="what-card"><span class="what-num">05</span><div class="what-icon-wrap"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><h3>Go-to-Market Strategy</h3><p>Revenue model review, channel audit, pricing strategy, and customer journey mapping — so you know which levers to pull and in what order.</p></div>
+      <div class="what-card"><span class="what-num">06</span><div class="what-icon-wrap"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><h3>Founder Advisory</h3><p>For founders in critical phases — fundraising, major pivots, rapid growth. Direct strategic access to pressure-test decisions and course-correct in real time.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section about-section" id="about">
+  <div class="section-inner">
+    <div class="about-inner">
+      <div class="about-left">
+        <div class="eyebrow reveal">Who We Are</div>
+        <h2 class="section-h reveal reveal-d1">A firm built for<br><em>early-stage founders.</em></h2>
+        <p class="reveal reveal-d2">Anviksika is a growth strategy firm specialising in startups between 0–2 years. Our team works exclusively with early-stage founders — because the problems you face at this stage are different from any other.</p>
+        <p class="reveal reveal-d2">We don't run vague consulting retainers. We deliver <strong>fixed-scope packages</strong> with concrete deliverables, clear timelines, and documented outputs you can use without us.</p>
+        <p class="reveal reveal-d3">We work with founders across <strong>SaaS, tech, e-commerce, and digital products</strong> in the US, UK, India, and beyond. Everything is virtual, fully documented, and outcomes-focused.</p>
+        <div class="team-pillars reveal reveal-d3">
+          <div class="pillar"><div class="pillar-title">Growth Analysts</div><div class="pillar-desc">Competitive research, funnel analysis, market mapping</div></div>
+          <div class="pillar"><div class="pillar-title">Strategists</div><div class="pillar-desc">Positioning, GTM, revenue model design</div></div>
+          <div class="pillar"><div class="pillar-title">Systems Designers</div><div class="pillar-desc">Playbooks, KPI frameworks, delegation structures</div></div>
+          <div class="pillar"><div class="pillar-title">Sector Researchers</div><div class="pillar-desc">Industry-specific intelligence for your exact market</div></div>
+        </div>
+      </div>
+      <div class="about-right-card reveal reveal-d2">
+        <span class="about-label">Why Anviksika — Not an Agency</span>
+        <div class="differentiator"><span class="diff-check">✓</span><div class="diff-text"><strong>Everything in writing. Always.</strong><span>18–65 page deliverables built for your business. Not a slide deck full of stock frameworks.</span></div></div>
+        <div class="differentiator"><span class="diff-check">✓</span><div class="diff-text"><strong>Fixed price. Fixed timeline.</strong><span>No retainers. No lock-in. You know exactly what you're getting before you pay.</span></div></div>
+        <div class="differentiator"><span class="diff-check">✓</span><div class="diff-text"><strong>Specific to your business.</strong><span>Competitor analysis for your exact category. Nothing templated. Nothing generic.</span></div></div>
+        <div class="differentiator"><span class="diff-check">✓</span><div class="diff-text"><strong>Done in 1–4 weeks.</strong><span>Not months of retainer billing. Clear deliverables before you pay a single dollar.</span></div></div>
+        <div class="differentiator"><span class="diff-check">✓</span><div class="diff-text"><strong>Early-stage specialists.</strong><span>We work only with 0–2 year founders. We understand bootstrapped constraints and what works at your stage.</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section packages-section" id="packages">
+  <div class="section-inner">
+    <div class="eyebrow reveal">Packages</div>
+    <h2 class="section-h reveal reveal-d1">Four packages. <em>Zero fluff.</em><br>Real deliverables.</h2>
+    <div class="packages-grid">
+      <div class="pkg-card">
+        <div class="pkg-num">Package 01</div>
+        <div class="pkg-name">Startup Diagnostic</div>
+        <div class="pkg-price">$699</div>
+        <div class="pkg-timeline">1 Week · 1 Session</div>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-features"><li>Deep dive into what's actually broken</li><li>5–7 competitor analysis & positioning map</li><li>Top 10 prioritised blockers</li><li>Action checklist</li><li>18–22 page diagnostic report</li><li>60-min walkthrough call</li></ul>
+        <div class="pkg-outcome">You'll know exactly what's broken and what to fix first.</div>
+        <a href="https://calendly.com/anviksika/30min" target="_blank" class="pkg-btn pkg-btn-outline">Book Discovery Call</a>
+      </div>
+      <div class="pkg-card">
+        <div class="pkg-num">Package 02</div>
+        <div class="pkg-name">Growth Readiness Audit</div>
+        <div class="pkg-price">$999</div>
+        <div class="pkg-timeline">2 Weeks · 28–35 Pages</div>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-features"><li>7–10 competitor deep-dive analysis</li><li>Full customer journey mapping</li><li>Revenue model & GTM strategy review</li><li>90-day growth roadmap (week by week)</li><li>Pricing strategy + channel audit</li><li>28–35 page report + roadmap doc</li></ul>
+        <div class="pkg-outcome">A structured 90-day plan to grow predictably.</div>
+        <a href="https://calendly.com/anviksika/30min" target="_blank" class="pkg-btn pkg-btn-outline">Book Discovery Call</a>
+      </div>
+      <div class="pkg-card popular">
+        <div class="pkg-popular-tag">Most Popular</div>
+        <div class="pkg-num">Package 03</div>
+        <div class="pkg-name">Scale Blueprint</div>
+        <div class="pkg-price">$1,299</div>
+        <div class="pkg-timeline">3–4 Weeks · 3 Sessions</div>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-features"><li>Full ops & team efficiency review</li><li>Bottleneck identification & removal plan</li><li>Market expansion & repositioning strategy</li><li>Step-by-step execution playbook</li><li>KPI framework + delegation systems</li><li>40–50 page blueprint + 3 working sessions</li></ul>
+        <div class="pkg-outcome">A complete system to scale without burning out.</div>
+        <a href="https://calendly.com/anviksika/30min" target="_blank" class="pkg-btn pkg-btn-solid">Book Discovery Call</a>
+      </div>
+      <div class="pkg-card">
+        <div class="pkg-num">Package 04</div>
+        <div class="pkg-name">Founder Advisory</div>
+        <div class="pkg-price">$1,599</div>
+        <div class="pkg-timeline">30 Days · On-Demand</div>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-features"><li>Direct access via Slack/WhatsApp/email</li><li>Weekly check-ins on live decisions</li><li>Pitch, deck & pricing feedback in real-time</li><li>Pressure-testing of major decisions</li><li>On-demand meetings (no fixed schedule)</li><li>50–65 page strategic summary at end</li></ul>
+        <div class="pkg-outcome">30 days of expert support during your most critical phase.</div>
+        <a href="https://calendly.com/anviksika/30min" target="_blank" class="pkg-btn pkg-btn-outline">Book Discovery Call</a>
+      </div>
+    </div>
+    <div class="payment-note reveal"><p><strong>Payment options:</strong> Stripe · PayPal · Wise &nbsp;|&nbsp; 50/50 split available on $999–$1,599 packages</p></div>
+  </div>
+</section>
+
+<section class="section process-section" id="process">
+  <div class="section-inner">
+    <div class="eyebrow reveal">How It Works</div>
+    <h2 class="section-h reveal reveal-d1">From confused to clarity <em>in five steps.</em></h2>
+    <div class="process-steps">
+      <div class="process-step"><div class="step-circle">1</div><div class="step-title">Book a Call</div><div class="step-desc">Schedule a 30-minute discovery call. Takes just a minute to book.</div></div>
+      <div class="process-step"><div class="step-circle">2</div><div class="step-title">Discovery</div><div class="step-desc">We discuss your current challenges and goals. No pitch, just honest conversation.</div></div>
+      <div class="process-step"><div class="step-circle">3</div><div class="step-title">Choose Package</div><div class="step-desc">Select the right package based on your needs and stage.</div></div>
+      <div class="process-step"><div class="step-circle">4</div><div class="step-title">We Deliver</div><div class="step-desc">Receive your custom report, roadmap, or blueprint on time.</div></div>
+      <div class="process-step"><div class="step-circle">5</div><div class="step-title">Execute & Grow</div><div class="step-desc">Implement the system and watch your startup gain real traction.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section results-section" id="results">
+  <div class="section-inner">
+    <div class="eyebrow reveal">Client Results</div>
+    <h2 class="section-h reveal reveal-d1">Real founders. <em>Real growth.</em></h2>
+    <div class="results-grid">
+      <div class="result-card">
+        <div class="result-card-top"><div class="result-founder">PDR World — Fibre Optics Manufacturing</div><div class="result-package">Growth Audit · Pan-India</div></div>
+        <div class="result-card-body">
+          <p class="result-quote">"I was doing everything—selling, operations, customer support. Made good money but was exhausted. This Audit showed me I had a real business hiding under the chaos. Cut my hours in half and revenue went UP."</p>
+          <div class="result-metric-row"><span class="result-metric-label">Before Monthly Revenue</span><span class="result-metric-val">$7.5k</span></div>
+          <div class="result-metric-row"><span class="result-metric-label">After Monthly Revenue</span><span class="result-metric-val">$12.8k</span></div>
+          <div class="result-metric-row"><span class="result-metric-label">Growth</span><span class="result-metric-val up">+61%</span></div>
+        </div>
+      </div>
+      <div class="result-card">
+        <div class="result-card-top"><div class="result-founder">Foremark.in — Web Development Agency</div><div class="result-package">Growth Audit · India (Remote)</div></div>
+        <div class="result-card-body">
+          <p class="result-quote">"I was doing everything for everyone and making nothing. This audit made me focus on SaaS founders who actually value quality. Went from $3k/month chaotic to structured growth. And I work LESS."</p>
+          <div class="result-metric-row"><span class="result-metric-label">Before Monthly Revenue</span><span class="result-metric-val">$3.2k</span></div>
+          <div class="result-metric-row"><span class="result-metric-label">After Monthly Revenue</span><span class="result-metric-val">$8.5k</span></div>
+          <div class="result-metric-row"><span class="result-metric-label">Growth</span><span class="result-metric-val up">+55%</span></div>
+        </div>
+      </div>
+      <div class="result-card">
+        <div class="result-card-top"><div class="result-founder">Summit Marketing Group — Digital Marketing</div><div class="result-package">Scale Blueprint · Austin, Texas</div></div>
+        <div class="result-card-body">
+          <p class="result-quote">"I thought I needed to work harder. Turns out I needed systems, processes, and the right team structure. This Blueprint gave me my life back and boosted profit. Now I can actually scale without losing my mind."</p>
+          <div class="result-metric-row"><span class="result-metric-label">Before Monthly Revenue</span><span class="result-metric-val">$14k</span></div>
+          <div class="result-metric-row"><span class="result-metric-label">After Monthly Revenue</span><span class="result-metric-val">$23.6k</span></div>
+          <div class="result-metric-row"><span class="result-metric-label">Growth</span><span class="result-metric-val up">+39%</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="results-footer">
+      <div class="results-stat"><div class="results-stat-num stat-counter" data-target="3" data-suffix="+">0+</div><div class="results-stat-label">Client Engagements</div></div>
+      <div class="results-stat"><div class="results-stat-num stat-counter" data-target="52" data-suffix="%">0%</div><div class="results-stat-label">Avg Revenue Growth</div></div>
+      <div class="results-stat"><div class="results-stat-num">3<span class="suf">+</span></div><div class="results-stat-label">Geographies Served</div></div>
+      <div class="results-stat"><div class="results-stat-num">3<span class="suf">+</span></div><div class="results-stat-label">Industries</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section faq-section" id="faq">
+  <div class="section-inner">
+    <div class="eyebrow reveal">FAQ</div>
+    <h2 class="section-h reveal reveal-d1"><em>Common</em> questions.</h2>
+    <div class="faq-grid">
+      <div>
+        <div class="faq-item"><button class="faq-question"><span>Who is Anviksika for?</span><span class="faq-arrow">+</span></button><div class="faq-answer">Early-stage founders (0–2 years) with a product or service but stuck on growth, positioning, or structure. You're bootstrapped or early-stage and ready to execute.</div></div>
+        <div class="faq-item"><button class="faq-question"><span>How long does each package take?</span><span class="faq-arrow">+</span></button><div class="faq-answer">Startup Diagnostic: 1 week. Growth Readiness Audit: 2 weeks. Scale Blueprint: 3–4 weeks. Founder Advisory: 30 days continuous.</div></div>
+        <div class="faq-item"><button class="faq-question"><span>Do you work with founders outside the US and UK?</span><span class="faq-arrow">+</span></button><div class="faq-answer">Yes. We work with founders across the US, UK, India, and any English-speaking market. Everything is virtual.</div></div>
+        <div class="faq-item"><button class="faq-question"><span>Can I start with Diagnostic and upgrade later?</span><span class="faq-arrow">+</span></button><div class="faq-answer">Yes. Many founders start with the Diagnostic for clarity, then upgrade to higher packages as needed.</div></div>
+      </div>
+      <div>
+        <div class="faq-item"><button class="faq-question"><span>What if I'm not happy with the deliverable?</span><span class="faq-arrow">+</span></button><div class="faq-answer">All packages come with a 5-day review period. If it doesn't meet expectations, we iterate or refund.</div></div>
+        <div class="faq-item"><button class="faq-question"><span>Do you sign NDAs?</span><span class="faq-arrow">+</span></button><div class="faq-answer">Yes. We take confidentiality seriously and are happy to sign NDAs before any work begins.</div></div>
+        <div class="faq-item"><button class="faq-question"><span>What payment methods do you accept?</span><span class="faq-arrow">+</span></button><div class="faq-answer">Stripe (US/UK), PayPal (Global), Wise (International). Split payments available on most packages.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact-strip" id="contact">
+  <div class="contact-strip-inner">
+    <div class="eyebrow">Reach Out</div>
+    <h3>Two ways to get started</h3>
+    <p>Book a 30-minute discovery call on Calendly, or drop us an email directly. No pitch. No pressure. Just an honest conversation about where you're stuck.</p>
+    <div class="contact-links">
+      <a href="https://calendly.com/anviksika/30min" target="_blank" class="contact-link-btn cal">
+        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Book on Calendly
+      </a>
+      <a href="mailto:anviksika@zohomail.in" class="contact-link-btn mail">
+        <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        anviksika@zohomail.in
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="eyebrow">Ready to Get Clarity?</div>
+  <h2 class="cta-title reveal">Stop burning runway<br>on the <em>wrong problems.</em></h2>
+  <p class="cta-sub reveal reveal-d1">Book a free 30-minute discovery call. We'll discuss your challenges and determine the best path forward.</p>
+  <div class="cta-buttons reveal reveal-d2">
+    <a href="https://calendly.com/anviksika/30min" target="_blank" class="cta-email-btn">Book Your Discovery Call →</a>
+    <a href="mailto:anviksika@zohomail.in" class="cta-ghost">Email Us Instead</a>
+  </div>
+  <p class="cta-note">US · UK · India · Global</p>
+</section>
+
+<footer>
+  <div>
+    <a href="#home" class="footer-logo">
+      <svg width="26" height="26" viewBox="0 0 36 36" fill="none"><polygon points="18,4 32,30 4,30" fill="none" stroke="#C9922A" stroke-width="2.5" stroke-linejoin="round"/><line x1="10" y1="23" x2="26" y2="23" stroke="#C9922A" stroke-width="2.5" stroke-linecap="round"/><line x1="22" y1="16" x2="32" y2="8" stroke="#C9922A" stroke-width="2.2" stroke-linecap="round"/><polyline points="27,8 32,8 32,13" fill="none" stroke="#C9922A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Anviksika
+    </a>
+    <div class="footer-tagline">Startup Clarity & Growth Systems &nbsp;·&nbsp; US · UK · India · Global</div>
+  </div>
+  <ul class="footer-links">
+    <li><a href="#problem">The Problem</a></li>
+    <li><a href="#packages">Packages</a></li>
+    <li><a href="#results">Results</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="https://calendly.com/anviksika/30min" target="_blank">Book a Call</a></li>
+    <li><a href="mailto:anviksika@zohomail.in">Email Us</a></li>
+  </ul>
+  <div class="footer-copy">© 2026 Anviksika. All rights reserved.</div>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>document.getElementById('topnav').classList.toggle('scrolled',window.scrollY>20));
+const btn=document.getElementById('mobileMenuBtn'),links=document.getElementById('navLinks');
+btn.addEventListener('click',()=>links.classList.toggle('open'));
+links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>links.classList.remove('open')));
+document.querySelectorAll('.faq-question').forEach(q=>{
+  q.addEventListener('click',()=>{
+    const item=q.closest('.faq-item'),isOpen=item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+    if(!isOpen)item.classList.add('open');
+  });
+});
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',function(e){
+    const id=this.getAttribute('href').substring(1);
+    if(id){const el=document.getElementById(id);if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth'});}}
+  });
+});
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:0.1});
+document.querySelectorAll('.reveal,.result-card,.pkg-card,.what-card,.blocker-card').forEach(el=>obs.observe(el));
+document.querySelectorAll('.pkg-card').forEach((c,i)=>c.style.transitionDelay=(i*0.08)+'s');
+
+// Counter animation — robust fix
+function runCounter(el){
+  if(el.dataset.done)return;
+  el.dataset.done='1';
+  const target=parseInt(el.getAttribute('data-target'));
+  const suffix=el.getAttribute('data-suffix')||'';
+  let current=0;
+  const steps=50, stepTime=1600/steps, inc=target/steps;
+  const timer=setInterval(()=>{
+    current=Math.min(current+inc,target);
+    el.textContent=Math.floor(current)+suffix;
+    if(current>=target)clearInterval(timer);
+  },stepTime);
+}
+const cObs=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting)
+      entry.target.querySelectorAll('.stat-counter').forEach(runCounter);
+  });
+},{threshold:0.3,rootMargin:'0px 0px -50px 0px'});
+const rs=document.querySelector('.results-section');
+if(rs)cObs.observe(rs);
+
+// Free AI Diagnosis form
+(function(){
+  const form=document.getElementById('diagForm');
+  if(!form)return;
+  const btn=document.getElementById('diagSubmitBtn');
+  const loading=document.getElementById('diagLoading');
+  const msg=document.getElementById('diagMsg');
+  const result=document.getElementById('diagResult');
+  const resultContent=document.getElementById('diagResultContent');
+
+  function showMsg(text,type){
+    msg.textContent=text;
+    msg.className='diag-msg visible '+type;
+  }
+  function clearMsg(){
+    msg.className='diag-msg';
+    msg.textContent='';
+  }
+  function escapeHtml(s){
+    return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+  function renderDiagnosis(d){
+    const li=(arr)=>(arr||[]).map(i=>`<li>${escapeHtml(i)}</li>`).join('');
+    const fixes=(d.fixes||[]).map((f,i)=>`
+      <div class="diag-fix">
+        <div class="diag-fix-title">${i+1}. ${escapeHtml(f.title||'')}</div>
+        <div class="diag-fix-rationale">${escapeHtml(f.rationale||'')}</div>
+      </div>`).join('');
+    resultContent.innerHTML=`
+      <h4>What's Working</h4>
+      <ul>${li(d.working)}</ul>
+      <h4>What's Unclear</h4>
+      <ul>${li(d.unclear)}</ul>
+      <h4>Top 3 Fixes</h4>
+      ${fixes}`;
+    result.classList.add('visible');
+    result.scrollIntoView({behavior:'smooth',block:'nearest'});
+  }
+
+  form.addEventListener('submit',async function(e){
+    e.preventDefault();
+    clearMsg();
+    result.classList.remove('visible');
+
+    const url=document.getElementById('diagUrl').value.trim();
+    const email=document.getElementById('diagEmail').value.trim();
+    const struggling=document.getElementById('diagStruggle').value.trim();
+    const company_website=document.getElementById('company_website').value;
+
+    if(!url){showMsg('Please enter your website URL.','error');return;}
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){showMsg('Please enter a valid email address.','error');return;}
+
+    btn.disabled=true;
+    loading.classList.add('visible');
+
+    try{
+      const res=await fetch('/api/diagnose',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({url,email,struggling,company_website})
+      });
+      const data=await res.json();
+
+      if(!res.ok){
+        if(data.code==='SCRAPE_BLOCKED'){
+          showMsg("We couldn't automatically read that site (it blocks bots). Try again, or email us your homepage text directly at anviksika@zohomail.in and we'll run it manually.",'info');
+        }else{
+          showMsg(data.error||'Something went wrong. Please try again.','error');
+        }
+        return;
+      }
+
+      renderDiagnosis(data.diagnosis);
+      if(data.cached){
+        showMsg("You've already run a diagnosis for this site — showing your saved result. A copy was also emailed to you.",'info');
+      }else{
+        showMsg('A copy of this diagnosis has also been sent to your email.','info');
+      }
+    }catch(err){
+      showMsg('Network error — please check your connection and try again.','error');
+    }finally{
+      btn.disabled=false;
+      loading.classList.remove('visible');
+    }
+  });
+})();
+</script>
+</body>
+</html>
